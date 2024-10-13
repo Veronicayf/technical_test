@@ -38,44 +38,25 @@ DB_NAME=testdb
 Ejecuta el siguiente comando para iniciar el servidor en modo de desarrollo:
 ```bash
 npm start
+```
+El servidor se ejecutará en ```http://localhost:3000``` si usas la configuración por defecto.
 
-### 4. Scripts de NPM
+6.**Pruebas de las rutas de la API:**
+Puedes usar herramientas como ```Postman``` o ```Insomnia``` para interactuar con las siguientes rutas:
 
-En el archivo `package.json` se ha añadido un script de inicio para facilitar el arranque del servidor con **Nodemon**.
+* ```GET /tasks``` - Obtener todas las tareas.
+* ```GET /task/:id``` - Obtener una tarea por su ID.
+* ```POST /task``` - Crear una nueva tarea.
+* ```PUT /task/:id``` - Actualizar una tarea por su ID.
+* ```DELETE /task/:id``` - Eliminar una tarea.
 
-```json
-"scripts": {
-  "start": "nodemon ./src/index.js"
-}
+## Uso de NVM y Node.js
+El uso de NVM (Node Version Manager) asegura que puedas gestionar múltiples versiones de Node.js en tu máquina de desarrollo. Esto es útil para mantener compatibilidad entre proyectos que pueden requerir distintas versiones de Node. Para este proyecto, utilice Node.js versión 20.18.0.
 
-Para iniciar el servidor, simplemente ejecuta:
-npm start
+## Retos y cómo los resolví
 
+* **Modularización de rutas:** Uno de los retos fue la modularización adecuada de las rutas y controladores para mantener el código ordenado y fácil de mantener. Para solucionarlo, creé controladores individuales para cada operación del CRUD y los importé en un archivo de rutas único.
 
+* **Manejo de errores:** Implementé un manejo de errores robusto tanto a nivel de rutas como de controladores. En caso de fallos en las consultas a la base de datos o en la validación de los datos de entrada, el servidor devuelve respuestas con códigos de estado HTTP adecuados (como 404 o 500).
 
-### Rutas API
-
-GET /task: Obtiene todas las tareas.
-GET /task/:id: Obtiene una tarea específica por ID.
-POST /task: Crea una nueva tarea.
-PUT /task/:id: Actualiza una tarea existente por ID.
-DELETE /task/:id: Elimina una tarea por ID.
-
-
-### Controladores
-
-Los controladores son responsables de manejar la lógica de negocio para cada ruta. La modularización mejora la mantenibilidad y la organización del código.
-
-get.controller: Controlador para obtener tareas.
-post.controller: Controlador para crear tareas.
-update.controller: Controlador para actualizar tareas.
-delete.controller: Controlador para eliminar tareas.
-
-
-### Variables de Entorno
-
-Las variables de entorno son importantes para:
-
-Configuración Segura: Mantienen la información sensible (como credenciales de base de datos) fuera del código fuente.
-Facilidad de Configuración: Permiten cambiar la configuración sin modificar el código, haciendo el entorno de desarrollo y producción más flexible.
-Mejor Mantenibilidad: Ayudan a mantener el código limpio y fácil de entender, separando la lógica de negocio de la configuración.
+* **Variables de entorno:** Configurar las variables de entorno correctamente fue clave para garantizar que los valores sensibles como las credenciales de la base de datos no estuvieran en el código fuente. Esto también facilita la configuración del entorno en diferentes máquinas.
