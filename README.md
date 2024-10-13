@@ -60,16 +60,3 @@ El uso de NVM (Node Version Manager) asegura que puedas gestionar múltiples ver
 * **Manejo de errores:** Implementé un manejo de errores robusto tanto a nivel de rutas como de controladores. En caso de fallos en las consultas a la base de datos o en la validación de los datos de entrada, el servidor devuelve respuestas con códigos de estado HTTP adecuados (como 404 o 500).
 
 * **Variables de entorno:** Configurar las variables de entorno correctamente fue clave para garantizar que los valores sensibles como las credenciales de la base de datos no estuvieran en el código fuente. Esto también facilita la configuración del entorno en diferentes máquinas.
-
-
-
-
-
-
-      
-
-      
-
-
-
-

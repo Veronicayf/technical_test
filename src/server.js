@@ -1,7 +1,7 @@
 const express = require('express');
 const server = express();
 const morgan = require('morgan');
-const routes = require('./routes/task.routes')
+const taskRoutes = require('./routes/task.routes')
 
 server.use(express.json());
 server.use(morgan('dev'))
@@ -21,6 +21,6 @@ server.use((req, res, next) => {
     next();
 });
 
-server.use('/', routes);
+server.use('/task', taskRoutes);
 
 module.exports = server
