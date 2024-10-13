@@ -1,4 +1,4 @@
-const { Task } = require('../../db');
+const { Task } = require('../../../../db');
 
 const deleteTask = async (req, res) => {
     const { id } = req.params;

@@ -1,4 +1,5 @@
-const { Task } = require('../../db');
+const { Task } = require('../../../../db');
+
 
 const getTasks = async (req, res) => {
     try {

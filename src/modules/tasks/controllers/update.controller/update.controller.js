@@ -1,4 +1,5 @@
-const { Task } = require('../../db');
+const { Task } = require('../../../../db');
+
 
 const updateTask = async (req, res) => {
     const { id } = req.params;
