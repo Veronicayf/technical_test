@@ -1,79 +1,62 @@
 # Proyecto Node.js con Express
-
 Este proyecto consiste en un API RESTful para gestionar tareas. Utiliza Express como framework de servidor, Sequelize como ORM para la base de datos, y está estructurado de manera modular para facilitar el mantenimiento y escalabilidad.
 
-## Instalación
+## Cómo abordé la prueba
+Mi enfoque principal fue diseñar una API clara y organizada para realizar operaciones de creación, lectura, actualización y eliminación de tareas (CRUD). Implementé las rutas usando Express y dividí el código en controladores para cada operación del CRUD, asegurando modularización y mantenibilidad. Además, incorporé el manejo de errores adecuado y el uso de variables de entorno.
 
-### 1. Instalación de Node.js usando NVM
+## Pasos para crear el proyecto en local
 
-1. **Instalar NVM:**
-   - En Windows, descarga [nvm-windows](https://github.com/coreybutler/nvm-windows/releases).
+1. **Clona el repositorio:**
+```bash
+git clone https://github.com/Veronicayf/technical_test.git
+```
 
-2. **Instalar Node.js con NVM:**
-   - Para instalar Node.js versión 16.14.2:
-     ```bash
-     nvm install 16.14.2
-     nvm use 16.14.2
-     ```
-   - Para hacer que esta versión sea la predeterminada:
-     ```bash
-     nvm alias default 16.14.2
-     ```
+2. **Instala Node.js utilizando NVM:**
+Si no tienes NVM (Node Versión Manager) instalado, sigue los pasos en su [documentacion oficial](https://github.com/nvm-sh/nvm#installing-and-updating), Luego, para instalar la versión correcta de Node.js:
+```bash
+nvm install <version> (la versión mas actualizada puede ser de la 18 en adelante)
+nvm use <version> (la versión mas actualizada puede ser de la 18 en adelante)
+```
 
-3. **Verificar la instalación de Node.js:**
-   ```bash
-   node -v
+3. **Instala las dependencias del proyecto:**
+Ejecuta el siguiente comando para instalar todas las dependencias necesarias desde el archivo ```package.json```:
+```bash
+npm install
+```
 
-### 2. Instalación de Dependencias
+4.**Configura el archivo .env:**
+Crea un archivo ```.env``` en la raíz del proyecto y configura las variables de entorno necesarias. Puedes basarte en el siguiente ejemplo:
+```bash
+PORT=3000
+DB_HOST=localhost
+DB_USER=usuario
+DB_PASSWORD=password
+DB_NAME=testdb
+```
 
-1. **Instalar Express:**
-npm install express
-
-2. **Instalar Nodemon (opcional, pero recomendado para desarrollo):**
-npm install -g nodemon
-
-### 3. Levantar el servidor
-
-Para iniciar el servidor, usa el siguiente comando:
+5.**Inicia el servidor:**
+Ejecuta el siguiente comando para iniciar el servidor en modo de desarrollo:
+```bash
 npm start
+```
+El servidor se ejecutará en ```http://localhost:3000``` si usas la configuración por defecto.
 
-### 4. Scripts de NPM
+6.**Pruebas de las rutas de la API:**
+Puedes usar herramientas como ```Postman``` o ```Insomnia``` para interactuar con las siguientes rutas:
 
-En el archivo `package.json` se ha añadido un script de inicio para facilitar el arranque del servidor con **Nodemon**.
+* ```GET /tasks``` - Obtener todas las tareas.
+* ```GET /task/:id``` - Obtener una tarea por su ID.
+* ```POST /task``` - Crear una nueva tarea.
+* ```PUT /task/:id``` - Actualizar una tarea por su ID.
+* ```DELETE /task/:id``` - Eliminar una tarea.
 
-```json
-"scripts": {
-  "start": "nodemon ./src/index.js"
-}
+## Uso de NVM y Node.js
+El uso de NVM (Node Version Manager) asegura que puedas gestionar múltiples versiones de Node.js en tu máquina de desarrollo. Esto es útil para mantener compatibilidad entre proyectos que pueden requerir distintas versiones de Node. Para este proyecto, utilice Node.js versión 20.18.0.
 
-Para iniciar el servidor, simplemente ejecuta:
-npm start
+## Retos y cómo los resolví
 
+* **Modularización de rutas:** Uno de los retos fue la modularización adecuada de las rutas y controladores para mantener el código ordenado y fácil de mantener. Para solucionarlo, creé controladores individuales para cada operación del CRUD y los importé en un archivo de rutas único.
 
+* **Manejo de errores:** Implementé un manejo de errores robusto tanto a nivel de rutas como de controladores. En caso de fallos en las consultas a la base de datos o en la validación de los datos de entrada, el servidor devuelve respuestas con códigos de estado HTTP adecuados (como 404 o 500).
 
-### Rutas API
-
-GET /task: Obtiene todas las tareas.
-GET /task/:id: Obtiene una tarea específica por ID.
-POST /task: Crea una nueva tarea.
-PUT /task/:id: Actualiza una tarea existente por ID.
-DELETE /task/:id: Elimina una tarea por ID.
-
-
-### Controladores
-
-Los controladores son responsables de manejar la lógica de negocio para cada ruta. La modularización mejora la mantenibilidad y la organización del código.
-
-get.controller: Controlador para obtener tareas.
-post.controller: Controlador para crear tareas.
-update.controller: Controlador para actualizar tareas.
-delete.controller: Controlador para eliminar tareas.
-
-
-### Variables de Entorno
-
-Las variables de entorno son importantes para:
-
-Configuración Segura: Mantienen la información sensible (como credenciales de base de datos) fuera del código fuente.
-Facilidad de Configuración: Permiten cambiar la configuración sin modificar el código, haciendo el entorno de desarrollo y producción más flexible.
-Mejor Mantenibilidad: Ayudan a mantener el código limpio y fácil de entender, separando la lógica de negocio de la configuración.
+* **Variables de entorno:** Configurar las variables de entorno correctamente fue clave para garantizar que los valores sensibles como las credenciales de la base de datos no estuvieran en el código fuente. Esto también facilita la configuración del entorno en diferentes máquinas.
