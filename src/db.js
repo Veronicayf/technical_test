@@ -8,11 +8,11 @@ const sequelize = new Sequelize(
     { logging: false }
 );
 
-taskModel(sequelize); // Inicializar el modelo
+taskModel(sequelize);
 
-const { Task } = sequelize.models; // Extraer el modelo Task
+const { Task } = sequelize.models;
 
 module.exports = {
-    Task, // Exportar el modelo Task
-    conn: sequelize, // Exportar la conexión a la base de datos
+    Task,
+    conn: sequelize,
 };

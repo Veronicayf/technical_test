@@ -2,7 +2,7 @@ const { Task } = require('../../../../db');
 
 
 const createTask = async (req, res) => {
-    const { title, review } = req.body;
+    const { title, review, status } = req.body;
 
     // Validar que los campos obligatorios no estén vacíos
     if (!title || !review) {
@@ -10,7 +10,7 @@ const createTask = async (req, res) => {
     }
 
     try {
-        const newTask = await Task.create({ title, review });
+        const newTask = await Task.create({ title, review, status }); //
         res.status(201).json(newTask);
     } catch (error) {
         console.error("Error al crear la tarea:", error);

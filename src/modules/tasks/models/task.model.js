@@ -1,3 +1,4 @@
+const { type } = require('express/lib/response');
 const sequelize = require('sequelize')
 const { DataTypes } = require('sequelize');
 
@@ -17,5 +18,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING(450),
             allowNull: false
         },
+        status: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
+        }
     }, { timestamps: false });
 }
