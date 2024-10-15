@@ -3,7 +3,7 @@ const { conn } = require('./db.js');
 const PORT = require('./config.js');
 
 
-conn.sync({ force: false })
+conn.sync({ force: true })
     .then(() => {
         server.listen(PORT, () => console.log(`Listening on the port: ${PORT}`));
     });

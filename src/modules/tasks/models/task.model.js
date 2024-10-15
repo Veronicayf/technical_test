@@ -1,4 +1,3 @@
-const { type } = require('express/lib/response');
 const sequelize = require('sequelize')
 const { DataTypes } = require('sequelize');
 

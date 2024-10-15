@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 const morgan = require('morgan');
 const taskRoutes = require('./modules/tasks/routes/task.routes')
+const authRoutes = require('./modules/authenticator/routes/auth.routes')
 
 server.use(morgan('dev'))
 server.use(express.json());
@@ -21,5 +22,6 @@ server.use((req, res, next) => {
 });
 
 server.use('/task', taskRoutes);
+server.use('/auth', authRoutes);
 
 module.exports = server
