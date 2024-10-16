@@ -1,62 +1,98 @@
-# Proyecto Node.js con Express
-Este proyecto consiste en un API RESTful para gestionar tareas. Utiliza Express como framework de servidor, Sequelize como ORM para la base de datos, y está estructurado de manera modular para facilitar el mantenimiento y escalabilidad.
+# Backend del Proyecto Aplicación de gestión de tareas
 
-## Cómo abordé la prueba
-Mi enfoque principal fue diseñar una API clara y organizada para realizar operaciones de creación, lectura, actualización y eliminación de tareas (CRUD). Implementé las rutas usando Express y dividí el código en controladores para cada operación del CRUD, asegurando modularización y mantenibilidad. Además, incorporé el manejo de errores adecuado y el uso de variables de entorno.
+Este es el backend del proyecto desarrollado con [tecnologías utilizadas, como Node.js, Express, Sequelize.]. Este backend gestiona la autenticación de usuarios y el manejo de tareas.
 
-## Pasos para crear el proyecto en local
+## Tabla de Contenidos
+- [Instalación](#instalación)
+- [Endpoints API](#endpoints-api)
+- [Manejo de Errores](#manejo-de-errores)
+- [Reto del Proyecto](#reto-del-proyecto)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
 
-1. **Clona el repositorio:**
+## Instalación
+
+Para ejecutar este proyecto en tu máquina local, sigue los siguientes pasos:
+
+### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/Veronicayf/technical_test.git
+git clone https://github.com/tu-usuario/tu-repositorio-backend.git
+cd tu-repositorio-backend
 ```
-
-2. **Instala Node.js utilizando NVM:**
-Si no tienes NVM (Node Versión Manager) instalado, sigue los pasos en su [documentacion oficial](https://github.com/nvm-sh/nvm#installing-and-updating), Luego, para instalar la versión correcta de Node.js:
-```bash
-nvm install <version> (la versión mas actualizada puede ser de la 18 en adelante)
-nvm use <version> (la versión mas actualizada puede ser de la 18 en adelante)
-```
-
-3. **Instala las dependencias del proyecto:**
-Ejecuta el siguiente comando para instalar todas las dependencias necesarias desde el archivo ```package.json```:
-```bash
+## 2. Instalar dependencias
+Usa NVM para asegurarte de que tienes la versión correcta de Node.js:
+``` bash
+nvm use
 npm install
 ```
+## 3. Configurar Variables de Entorno
 
-4.**Configura el archivo .env:**
-Crea un archivo ```.env``` en la raíz del proyecto y configura las variables de entorno necesarias. Puedes basarte en el siguiente ejemplo:
+Crea un archivo `.env` en la raíz del proyecto basado en el archivo `.env.example` que incluya la siguiente configuración:
+
 ```bash
-PORT=3000
+DATABASE_URL=postgres://usuario:contraseña@localhost:5432/tu-base-de-datos
+DB_USER=YOUR-USER
+DB_PASSWORD=YOUR-PASSWORD
 DB_HOST=localhost
-DB_USER=usuario
-DB_PASSWORD=password
-DB_NAME=testdb
-```
+DB_PORT=PORT
 
-5.**Inicia el servidor:**
-Ejecuta el siguiente comando para iniciar el servidor en modo de desarrollo:
+JWT_SECRET=tu-SuperSecret-Key
+```
+* **DATABASE_URL:** La URL de conexión a tu base de datos PostgreSQL. Asegúrate de reemplazar usuario, contraseña, y tu-base-de-datos con los valores adecuados para tu configuración.
+
+## Endpoints API
+Aquí están algunos de los principales endpoints disponibles:
+
+### Autenticación
+**POST /api/auth/register:** Registra un nuevo usuario.
+* Cuerpo de la petición:
 ```bash
-npm start
+{
+  "email": "usuario@ejemplo.com",
+  "password": "tu_contraseña"
+}
 ```
-El servidor se ejecutará en ```http://localhost:3000``` si usas la configuración por defecto.
+**POST /api/auth/login:** Inicia sesión con un usuario existente.
+* Cuerpo de la petición: 
+```bash
+{
+  "email": "usuario@ejemplo.com",
+  "password": "tu_contraseña"
+}
+```
 
-6.**Pruebas de las rutas de la API:**
-Puedes usar herramientas como ```Postman``` o ```Insomnia``` para interactuar con las siguientes rutas:
+## Manejo de Tareas
+* **GET /api/tasks:** Obtiene todas las tareas del usuario autenticado.
+* **POST /api/tasks:** Crea una nueva tarea.
+* Cuerpo de la peticion:
+```bash
+{
+  "titulo": "Nueva tarea",
+  "review": "Descripción de la tarea"
+}
+```
+* **PUT /api/tasks/:id:** Actualiza el estatus de una tarea específica.
+* **DELETE /api/tasks/:id:** Elimina una tarea específica.
 
-* ```GET /tasks``` - Obtener todas las tareas.
-* ```GET /task/:id``` - Obtener una tarea por su ID.
-* ```POST /task``` - Crear una nueva tarea.
-* ```PUT /task/``` - Actualizar una tarea por su status.
-* ```DELETE /task/:id``` - Eliminar una tarea.
+## Manejo de Errores
+El backend maneja errores comunes y devuelve respuestas con códigos de estado HTTP apropiados. En caso de error, se devolverá un mensaje descriptivo en formato JSON.
 
-## Uso de NVM y Node.js
-El uso de NVM (Node Version Manager) asegura que puedas gestionar múltiples versiones de Node.js en tu máquina de desarrollo. Esto es útil para mantener compatibilidad entre proyectos que pueden requerir distintas versiones de Node. Para este proyecto, utilice Node.js versión 20.18.0.
+## Reto del Proyecto
 
-## Retos y cómo los resolví
+Uno de los principales desafíos fue implementar el sistema de autenticación con JWT. Esto incluyó la creación de middleware para proteger rutas y asegurar que solo los usuarios autenticados pudieran acceder a ciertos endpoints.
 
-* **Modularización de rutas:** Uno de los retos fue la modularización adecuada de las rutas y controladores para mantener el código ordenado y fácil de mantener. Para solucionarlo, creé controladores individuales para cada operación del CRUD y los importé en un archivo de rutas único.
+El proceso también implicó gestionar la creación y verificación de tokens, así como mantener la seguridad de las contraseñas a través de la encriptación.
 
-* **Manejo de errores:** Implementé un manejo de errores robusto tanto a nivel de rutas como de controladores. En caso de fallos en las consultas a la base de datos o en la validación de los datos de entrada, el servidor devuelve respuestas con códigos de estado HTTP adecuados (como 404 o 500).
+Este proyecto está en desarrollo y acepto colaboraciones y sugerencias sobre cómo afrontar los desafíos que he encontrado.
 
-* **Variables de entorno:** Configurar las variables de entorno correctamente fue clave para garantizar que los valores sensibles como las credenciales de la base de datos no estuvieran en el código fuente. Esto también facilita la configuración del entorno en diferentes máquinas.
+## Tecnologías Utilizadas
+
+* **Node.js:** Entorno de ejecución para JavaScript.
+* **Express:** Framework para construir aplicaciones web.
+
+
+* **JWT:** Para autenticación de usuarios.
+* **bcrypt:** Para encriptar contraseñas.
+
+## Enlace Frontend
+**URL del Frontend:** [Technical_Test_Front](https://github.com/Veronicayf/technical_Test_front.git)
+
