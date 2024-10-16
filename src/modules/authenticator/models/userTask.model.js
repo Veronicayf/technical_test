@@ -6,14 +6,14 @@ module.exports = (sequelize) => {
         userId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Users', // Nombre de la tabla User
+                model: 'Users',
                 key: 'id'
             }
         },
         taskId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Tasks', // Nombre de la tabla Task
+                model: 'Tasks',
                 key: 'id'
             }
         }
