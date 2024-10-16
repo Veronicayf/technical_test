@@ -47,7 +47,7 @@ Puedes usar herramientas como ```Postman``` o ```Insomnia``` para interactuar co
 * ```GET /tasks``` - Obtener todas las tareas.
 * ```GET /task/:id``` - Obtener una tarea por su ID.
 * ```POST /task``` - Crear una nueva tarea.
-* ```PUT /task/:id``` - Actualizar una tarea por su ID.
+* ```PUT /task/``` - Actualizar una tarea por su status.
 * ```DELETE /task/:id``` - Eliminar una tarea.
 
 ## Uso de NVM y Node.js
