@@ -1,6 +1,6 @@
 # Backend del Proyecto Aplicación de gestión de tareas
 
-Este es el backend del proyecto desarrollado con [tecnologías utilizadas, como Node.js, Express, Sequelize.]. Este backend gestiona la autenticación de usuarios y el manejo de tareas.
+Este es el backend del proyecto desarrollado con [tecnologías utilizadas, como Node.js, Express, Sequelize. Este backend gestiona la autenticación de usuarios y el manejo de tareas.
 
 ## Tabla de Contenidos
 - [Instalación](#instalación)
