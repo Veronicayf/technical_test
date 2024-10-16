@@ -7,14 +7,14 @@ const updateTask = async (req, res) => {
     try {
         const task = await Task.findOne({ where: { id } });
         if (!task) {
-            return res.status(404).json({ message: 'Tarea no encontrada' });
+            return res.status(404).json({ message: 'Task not found' });
         }
         await task.update({ status })
         res.status(200).json(task);
 
     } catch (error) {
-        console.error("Error al actualizar la tarea:", error);
-        res.status(500).json({ message: 'Error al actualizar la tarea' });
+        console.error("Error updating task:", error);
+        res.status(500).json({ message: 'Error updating task' });
     }
 };
 

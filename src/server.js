@@ -3,23 +3,21 @@ const server = express();
 const morgan = require('morgan');
 const taskRoutes = require('./modules/tasks/routes/task.routes')
 const authRoutes = require('./modules/authenticator/routes/auth.routes')
+const cors = require('cors');
+
 
 server.use(morgan('dev'))
 server.use(express.json());
 
-//middleware de Corse
-server.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+// CORS
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+};
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-
-    next();
-});
+server.use(cors(corsOptions));
 
 server.use('/task', taskRoutes);
 server.use('/auth', authRoutes);

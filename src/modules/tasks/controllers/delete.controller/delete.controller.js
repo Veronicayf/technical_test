@@ -5,12 +5,12 @@ const deleteTask = async (req, res) => {
     try {
         const result = await Task.destroy({ where: { id } });
         if (result === 0) {
-            return res.status(404).json({ message: 'Tarea no encontrada' });
+            return res.status(404).json({ message: 'Task not found' });
         }
-        res.status(200).json({ message: 'Tarea eliminada con éxito' });
+        res.status(200).json({ message: 'Task deleted successfully' });
     } catch (error) {
-        console.error("Error al eliminar la tarea:", error);
-        res.status(500).json({ message: 'Error al eliminar la tarea' });
+        console.error("Error deleting task:", error);
+        res.status(500).json({ message: 'Error deleting task' });
     }
 };
 
